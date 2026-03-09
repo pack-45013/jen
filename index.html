@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI';
+background:black;
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+/* ดาว */
+
+.star{
+position:absolute;
+background:white;
+width:2px;
+height:2px;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2}
+to{opacity:1}
+}
+
+/* กล่อง */
+
+.card{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:25px;
+text-align:center;
+width:420px;
+z-index:10;
+}
+
+.slider img{
+width:260px;
+border-radius:20px;
+margin:20px 0;
+}
+
+button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+margin-top:20px;
+}
+
+button:hover{
+background:#ff1e4d;
+}
+
+/* หัวใจ */
+
+.heart{
+position:absolute;
+font-size:22px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
+
+}
+
+/* กุหลาบ */
+
+.rose{
+position:absolute;
+font-size:20px;
+animation:fall 7s linear infinite;
+}
+
+@keyframes fall{
+
+0%{transform:translateY(-10vh)}
+100%{transform:translateY(100vh)}
+
+}
+
+.chat{
+margin-top:20px;
+text-align:left;
+background:rgba(0,0,0,0.3);
+padding:15px;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>💖 ถึงคนที่ฉันรัก 💖</h1>
+
+<div class="slider">
+<img id="slide" src="love1.jpg">
+</div>
+
+<p>
+เราคบกันมาแล้ว
+<span id="days"></span>
+วัน ❤️
+</p>
+
+<button onclick="openLetter()">เปิดจดหมายรัก 💌</button>
+
+<div id="letter"></div>
+
+<div id="chat" class="chat"></div>
+
+<div id="question"></div>
+
+</div>
+
+<audio autoplay loop>
+<source src="love.mp3">
+</audio>
+
+<script>
+
+/* ดาว */
+
+for(let i=0;i<100;i++){
+
+let star=document.createElement("div");
+
+star.className="star";
+
+star.style.left=Math.random()*100+"vw";
+
+star.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(star);
+
+}
+
+/* สไลด์รูป */
+
+let images=["love1.jpg","love2.jpg","love3.jpg"];
+
+let index=0;
+
+setInterval(()=>{
+
+index++;
+
+if(index>=images.length) index=0;
+
+document.getElementById("slide").src=images[index];
+
+},3000);
+
+
+/* นับวันคบ */
+
+let startDate=new Date("2024-01-01");
+
+let today=new Date();
+
+let diff=today-startDate;
+
+let days=Math.floor(diff/(1000*60*60*24));
+
+document.getElementById("days").innerHTML=days;
+
+
+/* เปิดจดหมาย */
+
+function openLetter(){
+
+document.getElementById("letter").innerHTML=
+"ตั้งแต่วันที่เธอเข้ามาในชีวิต ทุกวันของฉันก็มีความหมาย ❤️";
+
+startChat();
+
+document.getElementById("question").innerHTML=
+"<br>💍 จะเป็นแฟนกับฉันไปตลอดไหม?<br><br><button onclick='yesLove()'>ตกลง ❤️</button>";
+
+}
+
+
+/* แชทจำลอง */
+
+let messages=[
+"เธอจำวันแรกที่เราเจอกันได้ไหม",
+"วันนั้นฉันดีใจมากเลยนะ",
+"ตั้งแต่นั้นมาเธอก็สำคัญกับฉันมาก",
+"ฉันรักเธอนะ ❤️"
+];
+
+let chatIndex=0;
+
+function startChat(){
+
+let chat=document.getElementById("chat");
+
+let interval=setInterval(()=>{
+
+if(chatIndex>=messages.length){
+
+clearInterval(interval);
+
+return;
+
+}
+
+chat.innerHTML+="<p>"+messages[chatIndex]+"</p>";
+
+chatIndex++;
+
+},1500);
+
+}
+
+
+/* ตอบตกลง */
+
+function yesLove(){
+
+document.getElementById("question").innerHTML=
+"ฉันจะรักเธอตลอดไป ❤️";
+
+}
+
+
+/* หัวใจ */
+
+setInterval(()=>{
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+
+},300);
+
+
+/* กุหลาบ */
+
+setInterval(()=>{
+
+let rose=document.createElement("div");
+
+rose.className="rose";
+
+rose.innerHTML="🌹";
+
+rose.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(rose);
+
+setTimeout(()=>rose.remove(),7000);
+
+},500);
+
+</script>
+
+</body>
+</html>
